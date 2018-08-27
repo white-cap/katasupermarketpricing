@@ -5,6 +5,7 @@ import io.yassir.experimentation.supermarketprincing.model.PricingRequest;
 import io.yassir.experimentation.supermarketprincing.model.PricingResponse;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  * @author yassir
@@ -25,7 +26,26 @@ public class XUnitForYPriceComputeStrategy implements CustomFunctionPricing {
     @Override
     public PricingResponse apply(PricingRequest pricingRequest) throws PricingComputeException {
         validateUnit(pricingRequest);
+        BigDecimal amount = BigDecimal.ZERO;
+        BigDecimal price = pricingRequest.getProduct().getPriceByUnitType().getPrice();
+        double unit = pricingRequest.getUnit();
+        BigDecimal realAmount = calculateAmount(price, unit).setScale(2, RoundingMode.HALF_UP);
 
-        return null;
+        BigDecimal amountDown = calculateAmount(price, unit).setScale(0, RoundingMode.DOWN);
+        return new PricingResponse(pricingRequest, analyseAndChoicePrice(realAmount, amountDown));
+    }
+
+    /**
+     * choice price down if only the delta isn't greater than 30%
+     *
+     * @param realAmount
+     * @param amountDown
+     * @return
+     */
+    private BigDecimal analyseAndChoicePrice(BigDecimal realAmount, BigDecimal amountDown) {
+        BigDecimal analyserAmount = BigDecimal.ONE.subtract(amountDown.divide(realAmount, 2, RoundingMode.HALF_UP));
+        if (analyserAmount.compareTo(BigDecimal.valueOf(30)) == 1)
+            return realAmount;
+        return amountDown;
     }
 }
