@@ -1,9 +1,10 @@
 package io.yassir.experimentation.supermarketprincing.business;
 
 import io.yassir.experimentation.supermarketprincing.business.exception.PricingComputeException;
+import io.yassir.experimentation.supermarketprincing.business.strategy.BuyXGetYFreeComputeStrategy;
 import io.yassir.experimentation.supermarketprincing.business.strategy.Context;
 import io.yassir.experimentation.supermarketprincing.business.strategy.SimplePricingComputeStrategy;
-import io.yassir.experimentation.supermarketprincing.business.strategy.priceByUnitComputeStrategy;
+import io.yassir.experimentation.supermarketprincing.business.strategy.PriceByUnitComputeStrategy;
 import io.yassir.experimentation.supermarketprincing.model.Enum.DiscountType;
 import io.yassir.experimentation.supermarketprincing.model.Enum.UnitType;
 import io.yassir.experimentation.supermarketprincing.model.PriceByUnitType;
@@ -72,7 +73,7 @@ public class PricingComputingTest {
     @Test
     public void priceByUnitTest() {
         PricingRequest request = new PricingRequest(this.priceByUnitProduct, UnitType.POUND, 2);
-        Context context = new Context(new priceByUnitComputeStrategy());
+        Context context = new Context(new PriceByUnitComputeStrategy());
         Assert.assertTrue(BigDecimal.valueOf(3.98).compareTo(context.compute(request).getAmount()) == 0);
     }
 
@@ -83,7 +84,7 @@ public class PricingComputingTest {
     @Test
     public void priceByUnitKoTest() {
         PricingRequest request = new PricingRequest(this.priceByUnitProduct, UnitType.POUND, 2);
-        Context context = new Context(new priceByUnitComputeStrategy());
+        Context context = new Context(new PriceByUnitComputeStrategy());
         Assert.assertFalse(BigDecimal.valueOf(1).compareTo(context.compute(request).getAmount()) == 0);
     }
 
@@ -95,7 +96,7 @@ public class PricingComputingTest {
     public void priceByUnitExceptionTest() {
         thrown.expect(PricingComputeException.class);
         PricingRequest request = new PricingRequest(this.priceByUnitProduct, UnitType.POUND, 0);
-        Context context = new Context(new priceByUnitComputeStrategy());
+        Context context = new Context(new PriceByUnitComputeStrategy());
         Assert.assertTrue(BigDecimal.valueOf(3.98).compareTo(context.compute(request).getAmount()) == 0);
     }
 
@@ -106,14 +107,20 @@ public class PricingComputingTest {
     @Test
     public void priceOfSubUnitTest() {
         PricingRequest request = new PricingRequest(this.priceByUnitProduct, UnitType.OUNCE, 2);
-        Context context = new Context(new priceByUnitComputeStrategy());
+        Context context = new Context(new PriceByUnitComputeStrategy());
         Assert.assertTrue(BigDecimal.valueOf(0.25).compareTo(context.compute(request).getAmount()) == 0);
     }
 
 
+    /**
+     * UT
+     * If you buy X unit Get Y unit behavior
+     */
     @Test
     public void buyXGetYFreePricingTest() {
-        //U.T. to handle BUY_X_GET_Y_FREE pricing behavior
+        PricingRequest request = new PricingRequest(this.buyXGetYFreeProduct, 3);
+        Context context = new Context(new BuyXGetYFreeComputeStrategy());
+        Assert.assertTrue(BigDecimal.valueOf(8).compareTo(context.compute(request).getAmount()) == 0);
     }
 
     @Test
