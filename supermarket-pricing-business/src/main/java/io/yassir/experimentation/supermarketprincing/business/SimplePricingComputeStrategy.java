@@ -10,7 +10,7 @@ import java.math.BigDecimal;
  * @author yassir
  * simple pricing impl strategy
  */
-public class SimplePricingComputeStrategy implements CustomFunctionPricing<PricingRequest, PricingResponse> {
+public class SimplePricingComputeStrategy implements CustomFunctionPricing {
 
 
     /**
@@ -21,6 +21,7 @@ public class SimplePricingComputeStrategy implements CustomFunctionPricing<Prici
      */
     @Override
     public PricingResponse apply(PricingRequest pricingRequest) throws PricingComputeException {
+        this.validateUnit(pricingRequest);
         BigDecimal price =  pricingRequest.getProduct().getPrice();
         double unit = pricingRequest.getUnit();
         return new PricingResponse(pricingRequest, price.multiply(BigDecimal.valueOf(unit)));

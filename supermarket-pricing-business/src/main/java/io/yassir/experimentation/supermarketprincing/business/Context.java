@@ -11,7 +11,7 @@ import io.yassir.experimentation.supermarketprincing.model.PricingResponse;
  */
 public class Context {
 
-    private CustomFunctionPricing<PricingRequest, PricingResponse> strategy;
+    private CustomFunctionPricing strategy;
 
     /**
      * Constructor context

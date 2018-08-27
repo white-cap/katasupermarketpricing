@@ -5,7 +5,7 @@ package io.yassir.experimentation.supermarketprincing.business.io.yassir.experim
  */
 public class PricingComputeException extends RuntimeException{
 
-    PricingComputeException(String alert){
+    public PricingComputeException(String alert){
         super(alert);
     }
 }
