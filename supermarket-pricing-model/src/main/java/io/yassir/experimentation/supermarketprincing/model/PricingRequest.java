@@ -18,6 +18,12 @@ public class PricingRequest {
         this.unit = unit;
     }
 
+    public PricingRequest(Product product, double unit) {
+        this.product = product;
+        this.unitType = UnitType.UNITARY;
+        this.unit = unit;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
