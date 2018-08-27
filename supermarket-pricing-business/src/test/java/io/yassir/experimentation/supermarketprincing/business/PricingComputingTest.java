@@ -67,9 +67,9 @@ public class PricingComputingTest {
 
     @Test
     public void priceByUnitPricingTest() {
-        PricingRequest request = new PricingRequest(this.priceByUnitProduct, UnitType.POUND, 1);
+        PricingRequest request = new PricingRequest(this.priceByUnitProduct, UnitType.POUND, 2);
         Context context = new Context(new priceByUnitComputeStrategy());
-        Assert.assertTrue(BigDecimal.valueOf(1.99).compareTo(context.compute(request).getAmount()) == 0);
+        Assert.assertTrue(BigDecimal.valueOf(3.98).compareTo(context.compute(request).getAmount()) == 0);
     }
 
     @Test
