@@ -3,19 +3,18 @@ package io.yassir.experimentation.supermarketprincing.model;
 import io.yassir.experimentation.supermarketprincing.model.Enum.DiscountType;
 import lombok.Getter;
 
-import java.math.BigDecimal;
 import java.util.Objects;
 
 @Getter
 public class Product {
 
     private final String ref;
-    private final BigDecimal price;
+    private final PriceByUnitType priceByUnitType;
     private final DiscountType discountType;
 
-    public Product(String ref, BigDecimal price, DiscountType pricingType) {
+    public Product(String ref, PriceByUnitType priceByUnitType, DiscountType pricingType) {
         this.ref = ref;
-        this.price = price;
+        this.priceByUnitType = priceByUnitType;
         this.discountType = pricingType;
     }
 
@@ -24,21 +23,21 @@ public class Product {
         if (this == o) return true;
         if (!(o instanceof Product)) return false;
         Product product = (Product) o;
-        return Objects.equals(ref, product.ref) &&
-                Objects.equals(price, product.price) &&
-                discountType == product.discountType;
+        return Objects.equals(getRef(), product.getRef()) &&
+                Objects.equals(getPriceByUnitType(), product.getPriceByUnitType()) &&
+                getDiscountType() == product.getDiscountType();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ref, price, discountType);
+        return Objects.hash(getRef(), getPriceByUnitType(), getDiscountType());
     }
 
     @Override
     public String toString() {
         return "Product{" +
                 "ref='" + ref + '\'' +
-                ", price=" + price +
+                ", priceByUnitType=" + priceByUnitType +
                 ", discountType=" + discountType +
                 '}';
     }
