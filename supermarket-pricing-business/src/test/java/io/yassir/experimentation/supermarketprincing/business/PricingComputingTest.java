@@ -1,7 +1,12 @@
 package io.yassir.experimentation.supermarketprincing.business;
 
 import io.yassir.experimentation.supermarketprincing.business.io.yassir.experimentation.supermarketprincing.business.exception.PricingComputeException;
+import io.yassir.experimentation.supermarketprincing.business.strategy.Context;
+import io.yassir.experimentation.supermarketprincing.business.strategy.SimplePricingComputeStrategy;
+import io.yassir.experimentation.supermarketprincing.business.strategy.priceByUnitComputeStrategy;
 import io.yassir.experimentation.supermarketprincing.model.Enum.DiscountType;
+import io.yassir.experimentation.supermarketprincing.model.Enum.UnitType;
+import io.yassir.experimentation.supermarketprincing.model.PriceByUnitType;
 import io.yassir.experimentation.supermarketprincing.model.PricingRequest;
 import io.yassir.experimentation.supermarketprincing.model.Product;
 import org.junit.Assert;
@@ -28,7 +33,7 @@ public class PricingComputingTest {
     private Product buyXGetYFreeProduct;
 
     /**
-     *  UT handle simple pricing behavior
+     * UT handle simple pricing behavior
      */
     @Test
     public void simplePricingTest() {
@@ -62,7 +67,9 @@ public class PricingComputingTest {
 
     @Test
     public void priceByUnitPricingTest() {
-        //U.T. to handle PRICE_BY_UNIT pricing behavior
+        PricingRequest request = new PricingRequest(this.priceByUnitProduct, UnitType.POUND, 1);
+        Context context = new Context(new priceByUnitComputeStrategy());
+        Assert.assertFalse(BigDecimal.valueOf(1.99).compareTo(context.compute(request).getAmount()) == 0);
     }
 
     @Test
@@ -77,9 +84,9 @@ public class PricingComputingTest {
 
     @Before
     public void setUp() {
-        simpleProduct = new Product("001", BigDecimal.valueOf(10), DiscountType.SIMPLE);
-        priceByUnitProduct = new Product("002", BigDecimal.valueOf(1.99), DiscountType.PRICE_BY_UNIT);
-        xUnitForYPriceProduct = new Product("003",BigDecimal.valueOf(0.50), DiscountType.X_UNIT_FOR_Y_PRICE);
-        buyXGetYFreeProduct = new Product("004",BigDecimal.valueOf(4), DiscountType.BUY_X_GET_Y_FREE);
+        simpleProduct = new Product("001", new PriceByUnitType(BigDecimal.valueOf(10)), DiscountType.SIMPLE);
+        priceByUnitProduct = new Product("002", new PriceByUnitType(BigDecimal.valueOf(1.99), UnitType.POUND), DiscountType.PRICE_BY_UNIT);
+        xUnitForYPriceProduct = new Product("003", new PriceByUnitType(BigDecimal.valueOf(0.50)), DiscountType.X_UNIT_FOR_Y_PRICE);
+        buyXGetYFreeProduct = new Product("004", new PriceByUnitType(BigDecimal.valueOf(4)), DiscountType.BUY_X_GET_Y_FREE);
     }
 }
