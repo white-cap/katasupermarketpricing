@@ -1,6 +1,6 @@
 package io.yassir.experimentation.supermarketprincing.business.strategy;
 
-import io.yassir.experimentation.supermarketprincing.business.io.yassir.experimentation.supermarketprincing.business.exception.PricingComputeException;
+import io.yassir.experimentation.supermarketprincing.business.exception.PricingComputeException;
 import io.yassir.experimentation.supermarketprincing.model.PricingRequest;
 import io.yassir.experimentation.supermarketprincing.model.PricingResponse;
 

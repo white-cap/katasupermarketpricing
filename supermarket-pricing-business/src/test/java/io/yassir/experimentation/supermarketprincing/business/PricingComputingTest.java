@@ -1,6 +1,6 @@
 package io.yassir.experimentation.supermarketprincing.business;
 
-import io.yassir.experimentation.supermarketprincing.business.io.yassir.experimentation.supermarketprincing.business.exception.PricingComputeException;
+import io.yassir.experimentation.supermarketprincing.business.exception.PricingComputeException;
 import io.yassir.experimentation.supermarketprincing.business.strategy.Context;
 import io.yassir.experimentation.supermarketprincing.business.strategy.SimplePricingComputeStrategy;
 import io.yassir.experimentation.supermarketprincing.business.strategy.priceByUnitComputeStrategy;

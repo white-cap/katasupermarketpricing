@@ -1,4 +1,4 @@
-package io.yassir.experimentation.supermarketprincing.business.io.yassir.experimentation.supermarketprincing.business.exception;
+package io.yassir.experimentation.supermarketprincing.business.exception;
 
 /**
  * Custom Exception for PricingComputeException

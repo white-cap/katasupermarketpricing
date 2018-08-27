@@ -1,6 +1,6 @@
 package io.yassir.experimentation.supermarketprincing.business.strategy;
 
-import io.yassir.experimentation.supermarketprincing.business.io.yassir.experimentation.supermarketprincing.business.exception.PricingComputeException;
+import io.yassir.experimentation.supermarketprincing.business.exception.PricingComputeException;
 import io.yassir.experimentation.supermarketprincing.model.PricingRequest;
 import io.yassir.experimentation.supermarketprincing.model.PricingResponse;
 
@@ -21,9 +21,10 @@ public class SimplePricingComputeStrategy implements CustomFunctionPricing {
      */
     @Override
     public PricingResponse apply(PricingRequest pricingRequest) throws PricingComputeException {
-        this.validateUnit(pricingRequest);
+        validateUnit(pricingRequest);
         BigDecimal price =  pricingRequest.getProduct().getPriceByUnitType().getPrice();
         double unit = pricingRequest.getUnit();
-        return new PricingResponse(pricingRequest, price.multiply(BigDecimal.valueOf(unit)));
+        BigDecimal amount = calculateAmount(price,unit);
+        return new PricingResponse(pricingRequest, amount);
     }
 }
