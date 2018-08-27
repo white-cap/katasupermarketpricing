@@ -78,14 +78,14 @@ public class PricingComputingTest {
 
     /**
      * UT
-     * handle simple pricing behavior with 0 unit request
+     * price by unit behavior with 0 unit request
      */
     @Test
     public void priceByUnitExceptionTest() {
         thrown.expect(PricingComputeException.class);
-        PricingRequest request = new PricingRequest(this.simpleProduct, 0);
-        Context context = new Context(new SimplePricingComputeStrategy());
-        Assert.assertFalse(BigDecimal.valueOf(10).compareTo(context.compute(request).getAmount()) == 0);
+        PricingRequest request = new PricingRequest(this.priceByUnitProduct, UnitType.POUND, 0);
+        Context context = new Context(new priceByUnitComputeStrategy());
+        Assert.assertTrue(BigDecimal.valueOf(3.98).compareTo(context.compute(request).getAmount()) == 0);
     }
 
 
