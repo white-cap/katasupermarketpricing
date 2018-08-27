@@ -28,7 +28,8 @@ public class PricingComputingTest {
     public void simplePricingTest() {
         PricingRequest request = new PricingRequest(this.simpleProduct, 3);
         Context context = new Context(new SimplePricingComputeStrategy());
-        Assert.assertEquals(BigDecimal.valueOf(30), context.compute(request).getAmount());
+
+        Assert.assertTrue(BigDecimal.valueOf(30).compareTo(context.compute(request).getAmount()) == 0);
     }
 
     @Test
