@@ -5,7 +5,9 @@ import io.yassir.experimentation.supermarketprincing.model.PricingRequest;
 import io.yassir.experimentation.supermarketprincing.model.Product;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.math.BigDecimal;
 
@@ -15,6 +17,9 @@ import java.math.BigDecimal;
  * UT to experiment pricing models
  */
 public class PricingComputingTest {
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     private Product simpleProduct;
     private Product priceByUnitProduct;
@@ -28,8 +33,14 @@ public class PricingComputingTest {
     public void simplePricingTest() {
         PricingRequest request = new PricingRequest(this.simpleProduct, 3);
         Context context = new Context(new SimplePricingComputeStrategy());
-
         Assert.assertTrue(BigDecimal.valueOf(30).compareTo(context.compute(request).getAmount()) == 0);
+    }
+
+    @Test
+    public void simplePricingKoTest() {
+        PricingRequest request = new PricingRequest(this.simpleProduct, 3);
+        Context context = new Context(new SimplePricingComputeStrategy());
+        Assert.assertFalse(BigDecimal.valueOf(10).compareTo(context.compute(request).getAmount()) == 0);
     }
 
     @Test
