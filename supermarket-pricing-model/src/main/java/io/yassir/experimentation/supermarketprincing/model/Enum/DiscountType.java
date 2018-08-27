@@ -1,6 +1,6 @@
 package io.yassir.experimentation.supermarketprincing.model.Enum;
 
-public enum PricingType {
+public enum DiscountType {
 
     SIMPLE,
     PRICE_BY_UNIT,
