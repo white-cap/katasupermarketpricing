@@ -78,6 +78,17 @@ public class PricingComputingTest {
 
     /**
      * UT
+     * price by unit ko behavior
+     */
+    @Test
+    public void priceByUnitKoTest() {
+        PricingRequest request = new PricingRequest(this.priceByUnitProduct, UnitType.POUND, 2);
+        Context context = new Context(new priceByUnitComputeStrategy());
+        Assert.assertFalse(BigDecimal.valueOf(1).compareTo(context.compute(request).getAmount()) == 0);
+    }
+
+    /**
+     * UT
      * price by unit behavior with 0 unit request
      */
     @Test
