@@ -13,7 +13,7 @@ import java.math.RoundingMode;
  * @author yassir
  * If you buy X unit Get Y unit for free impl strategy
  */
-public class buyXGetYFreeComputeStrategy implements CustomFunctionPricing {
+public class BuyXGetYFreeComputeStrategy implements CustomFunctionPricing {
 
 
     public static final String IS_UNEXPECTED = "is unexpected";

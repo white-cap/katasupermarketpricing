@@ -13,7 +13,7 @@ import java.math.RoundingMode;
  * @author yassir
  * price by unit impl strategy
  */
-public class priceByUnitComputeStrategy implements CustomFunctionPricing {
+public class PriceByUnitComputeStrategy implements CustomFunctionPricing {
 
 
     public static final String IS_UNEXPECTED = "is unexpected";
