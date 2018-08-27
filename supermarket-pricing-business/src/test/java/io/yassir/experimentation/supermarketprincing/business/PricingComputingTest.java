@@ -123,6 +123,17 @@ public class PricingComputingTest {
         Assert.assertTrue(BigDecimal.valueOf(8).compareTo(context.compute(request).getAmount()) == 0);
     }
 
+    /**
+     * UT
+     * If you buy 1 unit you don't get a discount behavior
+     */
+    @Test
+    public void buyXGetYFreePricingCaseOneUnitTest() {
+        PricingRequest request = new PricingRequest(this.buyXGetYFreeProduct, 1);
+        Context context = new Context(new BuyXGetYFreeComputeStrategy());
+        Assert.assertTrue(BigDecimal.valueOf(4).compareTo(context.compute(request).getAmount()) == 0);
+    }
+
     @Test
     public void xUnitForYPricePricingTest() {
         //U.T. to handle X_UNIT_FOR_Y_PRICE pricing behavior
