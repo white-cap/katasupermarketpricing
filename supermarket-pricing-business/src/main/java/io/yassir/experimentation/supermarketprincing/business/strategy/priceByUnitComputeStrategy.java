@@ -7,6 +7,7 @@ import io.yassir.experimentation.supermarketprincing.model.PricingResponse;
 import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  * @author yassir
@@ -41,6 +42,6 @@ public class priceByUnitComputeStrategy implements CustomFunctionPricing {
             throw new PricingComputeException(sb.append(StringUtils.SPACE).append(IS_UNEXPECTED).toString());
         }
 
-        return new PricingResponse(pricingRequest, amount);
+        return new PricingResponse(pricingRequest, amount.setScale(2, RoundingMode.HALF_UP));
     }
 }
