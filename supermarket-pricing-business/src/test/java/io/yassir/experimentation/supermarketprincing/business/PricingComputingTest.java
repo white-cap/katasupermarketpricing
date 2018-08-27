@@ -146,7 +146,7 @@ public class PricingComputingTest {
     public void setUp() {
         simpleProduct = new Product("001", new PriceByUnitType(BigDecimal.valueOf(10)), DiscountType.SIMPLE);
         priceByUnitProduct = new Product("002", new PriceByUnitType(BigDecimal.valueOf(1.99), UnitType.POUND), DiscountType.PRICE_BY_UNIT);
-        xUnitForYPriceProduct = new Product("003", new PriceByUnitType(BigDecimal.valueOf(0.50)), DiscountType.X_UNIT_FOR_Y_PRICE);
+        xUnitForYPriceProduct = new Product("003", new PriceByUnitType(BigDecimal.valueOf(0.40)), DiscountType.X_UNIT_FOR_Y_PRICE);
         buyXGetYFreeProduct = new Product("004", new PriceByUnitType(BigDecimal.valueOf(4)), DiscountType.BUY_X_GET_Y_FREE);
     }
 }
