@@ -65,12 +65,29 @@ public class PricingComputingTest {
         Assert.assertFalse(BigDecimal.valueOf(10).compareTo(context.compute(request).getAmount()) == 0);
     }
 
+    /**
+     * UT
+     * price by unit behavior
+     */
     @Test
-    public void priceByUnitPricingTest() {
+    public void priceByUnitTest() {
         PricingRequest request = new PricingRequest(this.priceByUnitProduct, UnitType.POUND, 2);
         Context context = new Context(new priceByUnitComputeStrategy());
         Assert.assertTrue(BigDecimal.valueOf(3.98).compareTo(context.compute(request).getAmount()) == 0);
     }
+
+    /**
+     * UT
+     * handle simple pricing behavior with 0 unit request
+     */
+    @Test
+    public void priceByUnitExceptionTest() {
+        thrown.expect(PricingComputeException.class);
+        PricingRequest request = new PricingRequest(this.simpleProduct, 0);
+        Context context = new Context(new SimplePricingComputeStrategy());
+        Assert.assertFalse(BigDecimal.valueOf(10).compareTo(context.compute(request).getAmount()) == 0);
+    }
+
 
     @Test
     public void buyXGetYFreePricingTest() {
