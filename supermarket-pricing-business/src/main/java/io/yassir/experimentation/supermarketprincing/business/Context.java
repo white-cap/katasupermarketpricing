@@ -1,9 +1,8 @@
 package io.yassir.experimentation.supermarketprincing.business;
 
+import io.yassir.experimentation.supermarketprincing.business.io.yassir.experimentation.supermarketprincing.business.exception.PricingComputeException;
 import io.yassir.experimentation.supermarketprincing.model.PricingRequest;
 import io.yassir.experimentation.supermarketprincing.model.PricingResponse;
-
-import java.util.function.Function;
 
 /**
  * @author yassir
@@ -12,13 +11,13 @@ import java.util.function.Function;
  */
 public class Context {
 
-    private Function<PricingRequest, PricingResponse> strategy;
+    private CustomFunction<PricingRequest, PricingResponse> strategy;
 
     /**
      * Constructor context
-     * @param strategy
+     * @param strategy the strategy
      */
-    public Context(Function strategy){
+    public Context(CustomFunction strategy){
         this.strategy = strategy;
     }
 
@@ -27,7 +26,7 @@ public class Context {
      * @param pricingRequest
      * @return PricingResponse
      */
-    public PricingResponse compute(PricingRequest pricingRequest){
+    public PricingResponse compute(PricingRequest pricingRequest) throws PricingComputeException {
         return strategy.apply(pricingRequest);
     }
 }
