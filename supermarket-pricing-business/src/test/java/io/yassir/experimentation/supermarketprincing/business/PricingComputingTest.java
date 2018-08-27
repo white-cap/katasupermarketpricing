@@ -1,10 +1,7 @@
 package io.yassir.experimentation.supermarketprincing.business;
 
 import io.yassir.experimentation.supermarketprincing.business.exception.PricingComputeException;
-import io.yassir.experimentation.supermarketprincing.business.strategy.BuyXGetYFreeComputeStrategy;
-import io.yassir.experimentation.supermarketprincing.business.strategy.Context;
-import io.yassir.experimentation.supermarketprincing.business.strategy.SimplePricingComputeStrategy;
-import io.yassir.experimentation.supermarketprincing.business.strategy.PriceByUnitComputeStrategy;
+import io.yassir.experimentation.supermarketprincing.business.strategy.*;
 import io.yassir.experimentation.supermarketprincing.model.Enum.DiscountType;
 import io.yassir.experimentation.supermarketprincing.model.Enum.UnitType;
 import io.yassir.experimentation.supermarketprincing.model.PriceByUnitType;
@@ -125,7 +122,7 @@ public class PricingComputingTest {
 
     /**
      * UT
-     * If you buy 1 unit you don't get a discount behavior
+     * If you buy 1 unit you wont get a discount behavior
      */
     @Test
     public void buyXGetYFreePricingCaseOneUnitTest() {
@@ -134,9 +131,15 @@ public class PricingComputingTest {
         Assert.assertTrue(BigDecimal.valueOf(4).compareTo(context.compute(request).getAmount()) == 0);
     }
 
+    /**
+     * UT
+     * If you buy 3 units you will get it for X price behavior
+     */
     @Test
     public void xUnitForYPricePricingTest() {
-        //U.T. to handle X_UNIT_FOR_Y_PRICE pricing behavior
+        PricingRequest request = new PricingRequest(this.xUnitForYPriceProduct, 3);
+        Context context = new Context(new XUnitForYPriceComputeStrategy());
+        Assert.assertTrue(BigDecimal.valueOf(1).compareTo(context.compute(request).getAmount()) == 0);
     }
 
     @Before
