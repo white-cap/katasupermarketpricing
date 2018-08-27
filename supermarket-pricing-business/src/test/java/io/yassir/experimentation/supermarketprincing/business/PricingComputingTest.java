@@ -88,6 +88,17 @@ public class PricingComputingTest {
         Assert.assertTrue(BigDecimal.valueOf(3.98).compareTo(context.compute(request).getAmount()) == 0);
     }
 
+    /**
+     * UT
+     * price of sub unit of the product behavior
+     */
+    @Test
+    public void priceOfSubUnitTest() {
+        PricingRequest request = new PricingRequest(this.priceByUnitProduct, UnitType.OUNCE, 2);
+        Context context = new Context(new priceByUnitComputeStrategy());
+        Assert.assertTrue(BigDecimal.valueOf(0.24875).compareTo(context.compute(request).getAmount()) == 0);
+    }
+
 
     @Test
     public void buyXGetYFreePricingTest() {
