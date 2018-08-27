@@ -6,7 +6,7 @@ import io.yassir.experimentation.supermarketprincing.model.PricingResponse;
 
 import java.math.BigDecimal;
 
-public class SimplePricingComputeStrategy implements CustomFunction<PricingRequest, PricingResponse> {
+public class SimplePricingComputeStrategy implements CustomFunctionPricing<PricingRequest, PricingResponse> {
 
 
     /**

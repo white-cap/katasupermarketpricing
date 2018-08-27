@@ -11,13 +11,13 @@ import io.yassir.experimentation.supermarketprincing.model.PricingResponse;
  */
 public class Context {
 
-    private CustomFunction<PricingRequest, PricingResponse> strategy;
+    private CustomFunctionPricing<PricingRequest, PricingResponse> strategy;
 
     /**
      * Constructor context
      * @param strategy the strategy
      */
-    public Context(CustomFunction strategy){
+    public Context(CustomFunctionPricing strategy){
         this.strategy = strategy;
     }
 
