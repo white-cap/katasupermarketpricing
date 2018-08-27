@@ -21,6 +21,9 @@ public class priceByUnitComputeStrategy implements CustomFunctionPricing {
      */
     @Override
     public PricingResponse apply(PricingRequest pricingRequest) throws PricingComputeException {
+        this.validateUnit(pricingRequest);
+        BigDecimal price =  pricingRequest.getProduct().getPriceByUnitType().getPrice();
+        double unit = pricingRequest.getUnit();
         return null;
     }
 }

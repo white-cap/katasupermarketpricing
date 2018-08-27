@@ -22,7 +22,7 @@ public class SimplePricingComputeStrategy implements CustomFunctionPricing {
     @Override
     public PricingResponse apply(PricingRequest pricingRequest) throws PricingComputeException {
         this.validateUnit(pricingRequest);
-        BigDecimal price =  pricingRequest.getProduct().getPrice();
+        BigDecimal price =  pricingRequest.getProduct().getPriceByUnitType().getPrice();
         double unit = pricingRequest.getUnit();
         return new PricingResponse(pricingRequest, price.multiply(BigDecimal.valueOf(unit)));
     }
