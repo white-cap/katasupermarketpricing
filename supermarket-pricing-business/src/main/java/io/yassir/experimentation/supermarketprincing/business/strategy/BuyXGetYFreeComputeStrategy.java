@@ -16,8 +16,6 @@ import java.math.RoundingMode;
 public class BuyXGetYFreeComputeStrategy implements CustomFunctionPricing {
 
 
-    public static final String IS_UNEXPECTED = "is unexpected";
-
     /**
      * Apply If you buy X unit Get Y unit for free behavior
      *
