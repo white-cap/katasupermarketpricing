@@ -26,13 +26,13 @@ public class XUnitForYPriceComputeStrategy implements CustomFunctionPricing {
     @Override
     public PricingResponse apply(PricingRequest pricingRequest) throws PricingComputeException {
         validateUnit(pricingRequest);
-        BigDecimal amount = BigDecimal.ZERO;
+        BigDecimal amount;
         BigDecimal price = pricingRequest.getProduct().getPriceByUnitType().getPrice();
         double unit = pricingRequest.getUnit();
         BigDecimal realAmount = calculateAmount(price, unit).setScale(2, RoundingMode.HALF_UP);
-
         BigDecimal amountDown = calculateAmount(price, unit).setScale(0, RoundingMode.DOWN);
-        return new PricingResponse(pricingRequest, analyseAndChoicePrice(realAmount, amountDown));
+        amount = analyseAndChoicePrice(realAmount, amountDown);
+        return new PricingResponse(pricingRequest, amount);
     }
 
     /**
