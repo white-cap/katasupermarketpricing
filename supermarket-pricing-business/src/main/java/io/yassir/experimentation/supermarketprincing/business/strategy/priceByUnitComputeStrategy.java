@@ -19,7 +19,7 @@ public class priceByUnitComputeStrategy implements CustomFunctionPricing {
     public static final String IS_UNEXPECTED = "is unexpected";
 
     /**
-     * Apply sprice by unit behavior
+     * Apply price by unit behavior
      *
      * @param pricingRequest request object (DTO)
      * @return PricingResponse
