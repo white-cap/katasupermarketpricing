@@ -35,7 +35,7 @@ public class PriceByUnitComputeStrategy implements CustomFunctionPricing {
             amount = calculateAmount(price,unit);
         } else if (UnitType.POUND == pricingRequest.getProduct().getPriceByUnitType().getUnitType() &&
                 UnitType.OUNCE == pricingRequest.getUnitType()) {
-            unit = unit / 16L;
+            unit = unit / 16;
             amount = calculateAmount(price,unit);
         } else {
             StringBuilder sb = new StringBuilder(pricingRequest.getUnitType().name());

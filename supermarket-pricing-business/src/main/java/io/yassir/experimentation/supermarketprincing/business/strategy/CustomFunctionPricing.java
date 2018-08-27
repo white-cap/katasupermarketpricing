@@ -29,7 +29,7 @@ public interface CustomFunctionPricing {
      * @throws PricingComputeException
      */
     default void validateUnit(PricingRequest pricingRequest) throws PricingComputeException {
-        if (pricingRequest.getUnit() == 0L || pricingRequest.getUnit() < 0L)
+        if (pricingRequest.getUnit() == 0 || pricingRequest.getUnit() < 0)
             throw new PricingComputeException("can't handle 0 unit");
     }
 
