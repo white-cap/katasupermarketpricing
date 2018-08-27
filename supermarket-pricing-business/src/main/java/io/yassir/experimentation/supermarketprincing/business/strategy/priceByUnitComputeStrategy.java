@@ -22,8 +22,14 @@ public class priceByUnitComputeStrategy implements CustomFunctionPricing {
     @Override
     public PricingResponse apply(PricingRequest pricingRequest) throws PricingComputeException {
         this.validateUnit(pricingRequest);
+        BigDecimal amount = BigDecimal.ZERO;
         BigDecimal price =  pricingRequest.getProduct().getPriceByUnitType().getPrice();
         double unit = pricingRequest.getUnit();
-        return null;
+        if(pricingRequest.getProduct().getPriceByUnitType().getUnitType() == pricingRequest.getUnitType()){
+            amount = price.multiply(BigDecimal.valueOf(unit));
+        }else{
+            //TODO product on pound and request on ounce
+        }
+        return new PricingResponse(pricingRequest,amount);
     }
 }
