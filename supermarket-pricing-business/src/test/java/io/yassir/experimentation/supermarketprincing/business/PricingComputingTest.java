@@ -1,5 +1,6 @@
 package io.yassir.experimentation.supermarketprincing.business;
 
+import io.yassir.experimentation.supermarketprincing.business.io.yassir.experimentation.supermarketprincing.business.exception.PricingComputeException;
 import io.yassir.experimentation.supermarketprincing.model.Enum.DiscountType;
 import io.yassir.experimentation.supermarketprincing.model.PricingRequest;
 import io.yassir.experimentation.supermarketprincing.model.Product;
@@ -27,7 +28,7 @@ public class PricingComputingTest {
     private Product buyXGetYFreeProduct;
 
     /**
-     * handle simple pricing behavior
+     *  UT handle simple pricing behavior
      */
     @Test
     public void simplePricingTest() {
@@ -36,9 +37,25 @@ public class PricingComputingTest {
         Assert.assertTrue(BigDecimal.valueOf(30).compareTo(context.compute(request).getAmount()) == 0);
     }
 
+    /**
+     * UT
+     * handle ko simple pricing behavior
+     */
     @Test
     public void simplePricingKoTest() {
         PricingRequest request = new PricingRequest(this.simpleProduct, 3);
+        Context context = new Context(new SimplePricingComputeStrategy());
+        Assert.assertFalse(BigDecimal.valueOf(10).compareTo(context.compute(request).getAmount()) == 0);
+    }
+
+    /**
+     * UT
+     * handle simple pricing behavior with 0 unit request
+     */
+    @Test
+    public void simplePricingExceptionTest() {
+        thrown.expect(PricingComputeException.class);
+        PricingRequest request = new PricingRequest(this.simpleProduct, 0);
         Context context = new Context(new SimplePricingComputeStrategy());
         Assert.assertFalse(BigDecimal.valueOf(10).compareTo(context.compute(request).getAmount()) == 0);
     }
