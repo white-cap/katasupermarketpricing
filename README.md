@@ -24,7 +24,6 @@ Intégration des models de pricing via le pattern strategy
 
 fonctionnalité de tracing en task thread
 
-en cours de developpement
 
 ### Tâches en cours:
 
