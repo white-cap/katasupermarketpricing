@@ -24,6 +24,7 @@ Intégration des models de pricing via le pattern strategy
 
 fonctionnalité de tracing en task thread
 
+Un labo d'experimentation d'implémentation anonyme de pricing sur => business/laboratory/LaboPricingSchems
 
 ### Tâches en cours:
 
