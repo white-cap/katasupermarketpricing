@@ -29,6 +29,21 @@ public class Context {
      * @return PricingResponse
      */
     public PricingResponse compute(PricingRequest pricingRequest) throws PricingComputeException {
-        return strategy.apply(pricingRequest);
+        PricingResponse pricingResponse = strategy.apply(pricingRequest);
+        auditInterceptor(pricingResponse);
+        return pricingResponse;
     }
+
+    /**
+     * task tracing for audit and decision
+     * @param pricingResponse
+     */
+    private void auditInterceptor(PricingResponse pricingResponse){
+        Runnable auditTrace = () -> {
+            System.out.println(pricingResponse);//mock of tracing
+        };
+        new Thread(auditTrace).start();
+    }
+
+
 }
