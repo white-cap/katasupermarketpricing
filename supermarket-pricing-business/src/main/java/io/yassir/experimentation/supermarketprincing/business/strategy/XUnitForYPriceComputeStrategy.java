@@ -14,8 +14,6 @@ import java.math.RoundingMode;
 public class XUnitForYPriceComputeStrategy implements CustomFunctionPricing {
 
 
-    public static final String IS_UNEXPECTED = "is unexpected";
-
     /**
      * Apply If you buy X unit Get it for Y price impl strategy behavior
      *
@@ -29,23 +27,28 @@ public class XUnitForYPriceComputeStrategy implements CustomFunctionPricing {
         BigDecimal amount;
         BigDecimal price = pricingRequest.getProduct().getPriceByUnitType().getPrice();
         double unit = pricingRequest.getUnit();
-        BigDecimal realAmount = calculateAmount(price, unit).setScale(2, RoundingMode.HALF_UP);
-        BigDecimal amountDown = calculateAmount(price, unit).setScale(0, RoundingMode.DOWN);
-        amount = analyseAndChoicePrice(realAmount, amountDown);
+        if (unit % 3 == 0) {
+            BigDecimal realAmount = calculateAmount(price, unit).setScale(2, RoundingMode.HALF_UP);
+            amount = analyseAndChoicePrice(realAmount);
+        } else {
+            amount = calculateAmount(price, unit);
+        }
         return new PricingResponse(pricingRequest, amount);
     }
 
     /**
-     * choice price down if only the delta isn't greater than 30%
+     * Apply an appropriate discount and return the amount
      *
-     * @param realAmount
-     * @param amountDown
+     * @param realAmount real Amount
      * @return
      */
-    private BigDecimal analyseAndChoicePrice(BigDecimal realAmount, BigDecimal amountDown) {
-        BigDecimal analyserAmount = BigDecimal.ONE.subtract(amountDown.divide(realAmount, 2, RoundingMode.HALF_UP));
-        if (analyserAmount.compareTo(BigDecimal.valueOf(30)) == 1)
-            return realAmount;
-        return amountDown;
+    private BigDecimal analyseAndChoicePrice(BigDecimal realAmount) {
+        final BigDecimal discountPercent = BigDecimal.valueOf(0.3);//30%
+        final BigDecimal afterDiscount = realAmount.subtract(realAmount.multiply(discountPercent));
+        if(BigDecimal.ONE.compareTo(afterDiscount) == 1 )
+            return afterDiscount.setScale(2, RoundingMode.HALF_UP);
+        else
+            return afterDiscount.setScale(0, RoundingMode.DOWN);
+
     }
 }
