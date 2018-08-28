@@ -115,9 +115,20 @@ public class PricingComputingTest {
      */
     @Test
     public void buyXGetYFreePricingTest() {
-        PricingRequest request = new PricingRequest(this.buyXGetYFreeProduct, 3);
+        PricingRequest request = new PricingRequest(this.buyXGetYFreeProduct, 3);//if you buy 2 you will get one for free
         Context context = new Context(new BuyXGetYFreeComputeStrategy());
         Assert.assertTrue(BigDecimal.valueOf(8).compareTo(context.compute(request).getAmount()) == 0);
+    }
+
+    /**
+     * UT
+     * If you buy X unit Get Y unit behavior
+     */
+    @Test
+    public void buyXGetYFreePricingKoTest() {
+        PricingRequest request = new PricingRequest(this.buyXGetYFreeProduct, 4);
+        Context context = new Context(new BuyXGetYFreeComputeStrategy());
+        Assert.assertFalse(BigDecimal.valueOf(12).compareTo(context.compute(request).getAmount()) == 0);
     }
 
     /**
@@ -141,6 +152,7 @@ public class PricingComputingTest {
         Context context = new Context(new XUnitForYPriceComputeStrategy());
         Assert.assertTrue(BigDecimal.valueOf(1).compareTo(context.compute(request).getAmount()) == 0);
     }
+
 
     @Before
     public void setUp() {
