@@ -22,7 +22,7 @@ Design ouvert à l'extension
 
 Intégration des models de pricing via le pattern strategy
 
-fonctionnalité de tracing en task thread
+fonctionnalité de tracing en task thread pour audit et décision 
 
 Un labo d'experimentation d'implémentation anonyme de pricing sur => business/laboratory/LaboPricingSchems
 
