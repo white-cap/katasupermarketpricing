@@ -29,6 +29,7 @@ public class PricingComputingTest {
     private Product priceByUnitProduct;
     private Product xUnitForYPriceProduct;
     private Product buyXGetYFreeProduct;
+    private Product xUnitForYPriceProduct2;
 
     /**
      * UT handle simple pricing behavior
@@ -153,12 +154,24 @@ public class PricingComputingTest {
         Assert.assertTrue(BigDecimal.valueOf(1).compareTo(context.compute(request).getAmount()) == 0);
     }
 
+    /**
+     * UT
+     * If you buy 6 units with rounded price you will get it for X price behavior
+     */
+    @Test
+    public void xUnitForYPricePricingOtherCaseTest() {
+        PricingRequest request = new PricingRequest(this.xUnitForYPriceProduct2, 6);
+        Context context = new Context(new XUnitForYPriceComputeStrategy());
+        Assert.assertTrue(BigDecimal.valueOf(6).compareTo(context.compute(request).getAmount()) == 1);
+    }
+
 
     @Before
     public void setUp() {
         simpleProduct = new Product("001", new PriceByUnitType(BigDecimal.valueOf(10)), DiscountType.SIMPLE);
         priceByUnitProduct = new Product("002", new PriceByUnitType(BigDecimal.valueOf(1.99), UnitType.POUND), DiscountType.PRICE_BY_UNIT);
-        xUnitForYPriceProduct = new Product("003", new PriceByUnitType(BigDecimal.valueOf(0.40)), DiscountType.X_UNIT_FOR_Y_PRICE);
+        xUnitForYPriceProduct = new Product("003", new PriceByUnitType(BigDecimal.valueOf(0.50)), DiscountType.X_UNIT_FOR_Y_PRICE);
         buyXGetYFreeProduct = new Product("004", new PriceByUnitType(BigDecimal.valueOf(4)), DiscountType.BUY_X_GET_Y_FREE);
+        xUnitForYPriceProduct2 = new Product("005", new PriceByUnitType(BigDecimal.valueOf(1)), DiscountType.X_UNIT_FOR_Y_PRICE);
     }
 }
