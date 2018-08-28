@@ -26,7 +26,7 @@ public class BuyXGetYFreeComputeStrategy implements CustomFunctionPricing {
     @Override
     public PricingResponse apply(PricingRequest pricingRequest) throws PricingComputeException {
         validateUnit(pricingRequest);
-        BigDecimal amount = BigDecimal.ZERO;
+        BigDecimal amount ;
         BigDecimal price = pricingRequest.getProduct().getPriceByUnitType().getPrice();
         double unit = pricingRequest.getUnit();
         if (2 < unit) {

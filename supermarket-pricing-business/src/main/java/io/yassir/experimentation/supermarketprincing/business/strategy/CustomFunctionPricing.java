@@ -13,6 +13,8 @@ import java.math.BigDecimal;
 @FunctionalInterface
 public interface CustomFunctionPricing {
 
+    String CAN_T_HANDLE_0_UNIT = "can't handle 0 unit";
+
     /**
      * Applies this function to the given argument.
      *
@@ -30,7 +32,7 @@ public interface CustomFunctionPricing {
      */
     default void validateUnit(PricingRequest pricingRequest) throws PricingComputeException {
         if (pricingRequest.getUnit() == 0 || pricingRequest.getUnit() < 0)
-            throw new PricingComputeException("can't handle 0 unit");
+            throw new PricingComputeException(CAN_T_HANDLE_0_UNIT);
     }
 
     /**
