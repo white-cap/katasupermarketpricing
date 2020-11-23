@@ -1,5 +1,5 @@
 
-# katasupermarketpricing
+# katasupermarketpricing (CRUD)
 The problem domain is something seemingly simple: pricing goods at supermarkets.
  
 Some things in supermarkets have simple prices: this can of beans costs $0.65. Other things have more complex prices. For example:
